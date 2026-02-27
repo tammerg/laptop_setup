@@ -34,7 +34,7 @@
     "vale.valeCLI.config": "",
     "vale.valeCLI.path": "/opt/homebrew/bin/vale",
     "vsicons.dontShowNewVersionMessage": true,
-    "workbench.colorTheme": "Dracula",
+    "workbench.colorTheme": "Dracula Theme",
     "workbench.iconTheme": "vscode-icons",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "workbench.sideBar.location": "right",
