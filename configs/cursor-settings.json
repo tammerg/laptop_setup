@@ -1,0 +1,47 @@
+{
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "editor.accessibilitySupport": "off",
+    "editor.fontFamily": "JetBrainsMonoNFM-Regular, JetBrains Mono, monospace",
+    "editor.fontSize": 16,
+    "editor.guides.bracketPairs": true,
+    "editor.inlineSuggest.enabled": true,
+    "explorer.compactFolders": false,
+    "explorer.confirmDragAndDrop": false,
+    "git.autofetch": true,
+    "git.openRepositoryInParentFolders": "never",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "github.copilot.enable": {
+        "*": true,
+        "markdown": true,
+        "plaintext": false,
+        "scminput": false,
+        "yaml": true
+    },
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "githubPullRequests.pullBranch": "never",
+    "githubPullRequests.terminalLinksHandler": "github",
+    "redhat.telemetry.enabled": true,
+    "terminal.integrated.env.osx": {
+        "CW_NEW_SESSION": "1",
+        "FIG_NEW_SESSION": "1",
+        "Q_NEW_SESSION": "1"
+    },
+    "terminal.integrated.fontFamily": "JetBrainsMonoNFM-Regular, JetBrains Mono, monospace",
+    "terminal.integrated.fontSize": 16,
+    "vale.doNotShowWarningForFileToBeSavedBeforeLinting": true,
+    "vale.valeCLI.config": "",
+    "vale.valeCLI.path": "/opt/homebrew/bin/vale",
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.colorTheme": "Dracula",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "workbench.sideBar.location": "right",
+    "workbench.startupEditor": "none",
+    "cursor.cpp.disabledLanguages": [
+        "plaintext",
+        "scminput"
+    ],
+    "datadog.connection.notification.suppressSignInNotification": true
+}

@@ -1,0 +1,161 @@
+# PATH setup
+PATH="/Users/tammer.galal/projects:$PATH"
+export PATH
+
+# Zsh completion system
+autoload -Uz compinit
+# Only regenerate completion dump once per day (speeds up startup)
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+# History settings
+HISTSIZE=50000
+SAVEHIST=50000
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt SHARE_HISTORY
+
+# Autosuggestions (lazy loaded after first prompt)
+_load_autosuggestions() {
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  precmd_functions=("${precmd_functions[@]/_load_autosuggestions}")
+}
+precmd_functions+=(_load_autosuggestions)
+
+# Fast syntax highlighting
+source /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# eza (better ls)
+alias ls="eza --icons"
+alias ll="eza --icons -l"
+alias la="eza --icons -la"
+alias lt="eza --icons --tree -L 2"
+
+# bat (better cat)
+alias cat="bat"
+
+# lazygit
+alias lg="lazygit"
+
+# tldr
+alias tldr="tldr"
+
+# Git aliases
+alias g='git'
+alias ga='git add'
+alias gaa='git add --all'
+alias gcob="git checkout -b"
+alias gcb='git checkout -b'
+alias gco='git checkout'
+alias gcm="git commit -m"
+alias gb='git branch'
+alias gba='git branch --all'
+alias gbd='git branch --delete'
+alias gs="git status"
+alias gst='git status'
+alias gpo="git push origin"
+alias gpom="git push origin main"
+alias gpu="git push upstream"
+
+# Hotkeys reference
+alias hotkeys="bash /Users/tammer.galal/projects/dotfiles/hotkeys.sh"
+
+# Other aliases
+alias orphanedImages="~/projects/orphanedImages.sh"
+alias itl="instruqt track logs"
+alias itu="instruqt update"
+
+# peon-ping quick controls
+alias peon="bash /Users/tammer.galal/.claude/hooks/peon-ping/peon.sh"
+[ -f /Users/tammer.galal/.claude/hooks/peon-ping/completions.bash ] && source /Users/tammer.galal/.claude/hooks/peon-ping/completions.bash
+
+# Initialize Starship prompt (cached for faster startup)
+_starship_cache="$HOME/.cache/starship_init.zsh"
+if [[ ! -f "$_starship_cache" || $(command -v starship) -nt "$_starship_cache" ]]; then
+  starship init zsh > "$_starship_cache"
+fi
+source "$_starship_cache"
+unset _starship_cache
+
+# Initialize zoxide (cached for faster startup)
+_zoxide_cache="$HOME/.cache/zoxide_init.zsh"
+if [[ ! -f "$_zoxide_cache" || $(command -v zoxide) -nt "$_zoxide_cache" ]]; then
+  zoxide init zsh > "$_zoxide_cache"
+fi
+source "$_zoxide_cache"
+unset _zoxide_cache
+
+# BEGIN ANSIBLE MANAGED BLOCK
+# Add homebrew binaries to the path.
+PATH=${PATH}:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH?}
+export PATH
+
+# Force certain more-secure behaviours from homebrew
+export HOMEBREW_NO_INSECURE_REDIRECT=1
+export HOMEBREW_CASK_OPTS=--require-sha
+export HOMEBREW_DIR=/opt/homebrew
+export HOMEBREW_BIN=/opt/homebrew/bin
+
+# export paths to cloned repositories
+export STOREDOG_PATH=/Users/tammer.galal/projects/storedog
+export TECHSTORIES_PATH=/Users/tammer.galal/projects/techstories-demo-app
+
+# Prefer GNU binaries to Macintosh binaries.
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
+
+# Add AWS CLI to PATH
+export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"
+
+# Add datadog devtools binaries to the PATH
+export PATH="/Users/tammer.galal/projects/devtools/bin:$PATH"
+
+# Point GOPATH to our go sources
+export GOPATH="${HOME?}/go"
+
+# Add binaries that are go install-ed to PATH
+export PATH="${GOPATH?}/bin:${PATH?}"
+
+# Point DATADOG_ROOT to ~/dd symlink
+export DATADOG_ROOT="${HOME?}/dd"
+
+# Tell the devenv vm to mount $GOPATH/src rather than just dd-go
+export MOUNT_ALL_GO_SRC=1
+
+# store key in the login keychain instead of aws-vault managing a hidden keychain
+export AWS_VAULT_KEYCHAIN_NAME=login
+
+# tweak session times so you don't have to re-enter passwords every 5min
+export AWS_SESSION_TTL=24h
+export AWS_ASSUME_ROLE_TTL=1h
+
+# Helm switch from storing objects in kubernetes configmaps to
+# secrets by default, but we still use the old default.
+export HELM_DRIVER=configmap
+
+# Go 1.16+ sets GO111MODULE to off by default with the intention to
+# remove it in Go 1.18, which breaks projects using the dep tool.
+export GO111MODULE=auto
+export GOPRIVATE=github.com/DataDog
+# END ANSIBLE MANAGED BLOCK
+
+# Add Python user binaries to PATH
+export PATH="/Users/tammer.galal/Library/Python/3.9/bin:$PATH"
+
+[[ -f "$HOME/fig-export/dotfiles/dotfile.zsh" ]] && builtin source "$HOME/fig-export/dotfiles/dotfile.zsh"
+
+# dd-gitsign (required for signed commits)
+eval "$(dd-gitsign load-key)"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# BEGIN SCFW MANAGED BLOCK
+alias npm="scfw run npm"
+alias pip="scfw run pip"
+alias poetry="scfw run poetry"
+export SCFW_DD_AGENT_LOG_PORT="10365"
+export SCFW_DD_LOG_LEVEL="ALLOW"
+export SCFW_HOME="/Users/tammer.galal/.scfw"
+# END SCFW MANAGED BLOCK
